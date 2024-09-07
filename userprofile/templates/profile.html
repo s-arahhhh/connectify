@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="avatar-section">
+                <div class="avatar"></div>
+                <button class="edit-avatar-btn">edit avatar</button>
+            </div>
+            <div class="about-section">
+                <h1>ABOUT ME!</h1>
+                <textarea class="about-text">{{ user_data.about }}</textarea>
+                <div class="profile-btns">
+                    <button class="edit-profile-btn">edit profile</button>
+                    <button class="save-edit-btn">save edit</button>
+                </div>
+            </div>
+            <div class="info-section">
+                <p>age: {{ user_data.age }}</p>
+                <p>gender: {{ user_data.gender }}</p>
+                <p>status: {{ user_data.status }}</p>
+            </div>
+        </div>
+
+        <div class="profile-body">
+            <div class="watch-list">
+                <h3>watch/listen list</h3>
+                <textarea class="watch-list-text">{{ ', '.join(user_data.watch_list) }}</textarea>
+            </div>
+            <div class="likes-section">
+                <h3>likes:</h3>
+                <textarea>{{ user_data.likes }}</textarea>
+            </div>
+            <div class="dislikes-section">
+                <h3>dislikes:</h3>
+                <textarea>{{ user_data.dislikes }}</textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
