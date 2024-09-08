@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectify Video Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Connectify Meet</h1>
+    <div class="video-container">
+        <video id="localVideo" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+
+    <!-- Chatbox Section -->
+    <div id="chatbox">
+        <ul id="messages"></ul>
+        <input id="message" autocomplete="off" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js"></script>
+    <script type="text/javascript">
+        const socket = io();
+
+        // Get the room name from the URL
+        const room = "{{ room }}";
+        const username = prompt("Enter your username:");
+
+        // Join the room
+        socket.emit('join', {username: username, room: room});
+
+        // Handle incoming chat messages
+        socket.on('message', function(msg) {
+            const messageList = document.getElementById('messages');
+            const newMessage = document.createElement('li');
+            newMessage.textContent = msg;
+            messageList.appendChild(newMessage);
+        });
+
+        // Function to send chat messages
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value;
+            socket.emit('message', {msg: `${username}: ${message}`, room: room});
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>

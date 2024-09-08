@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+video {
+    width: 45%;
+    margin: 0 10px;
+    border: 2px solid black;
+}
+
+#chatbox {
+    margin-top: 20px;
+}
+
+#messages {
+    list-style-type: none;
+    padding: 0;
+}
+
+#messages li {
+    padding: 5px 0;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
