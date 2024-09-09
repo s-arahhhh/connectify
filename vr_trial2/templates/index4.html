@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Meeting Room</title>
+    <link rel="stylesheet" href="/static4/style4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Meeting Room</h1>
+        
+        <div class="section">
+            <h2>Create a Room</h2>
+            <button id="create-room">Create Room</button>
+            <p id="room-id"></p>
+        </div>
+        
+        <div class="section">
+            <h2>Join a Room</h2>
+            <input type="text" id="join-room-id" placeholder="Enter Room ID">
+            <input type="text" id="username" placeholder="Enter Username">
+            <button id="join-room">Join Room</button>
+        </div>
+        
+        <div class="section">
+            <h2>Chat</h2>
+            <textarea id="chat-log" readonly></textarea>
+            <input type="text" id="chat-input" placeholder="Enter message">
+            <button id="send-message">Send</button>
+        </div>
+        
+        <div class="section">
+            <h2>Users in Room</h2>
+            <ul id="user-list"></ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="/static4/main.js"></script>
+</body>
+</html>
+
