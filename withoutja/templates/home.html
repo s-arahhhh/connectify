@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chat App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="content">
+        <form method="post" class="buttons">
+            <h3>Enter The Chat Room</h3>
+            <div>
+                <label>Name:</label>
+                <input type="text" placeholder="Pick a name!" name="name" value="{{ session.get('name', '') }}" />
+            </div>
+            <div class="join">
+                <input type="text" placeholder="Room Code" name="code" value="{{ request.form.get('code', '') }}" />
+                <button type="submit" name="join" value="true">Join a Room</button>
+            </div>
+            <button type="submit" name="create" value="true" class="create-btn">Create a Room</button>
+            {% if error %}
+                <ul>
+                    <li>{{ error }}</li>
+                </ul>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

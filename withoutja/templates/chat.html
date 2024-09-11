@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="message-box">
+        <h2>Chat Room: {{ code }}</h2>
+        <div class="messages">
+            {% for msg in messages %}
+                <div class="text">
+                    <span><strong>{{ msg.name }}</strong>: {{ msg.message }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <form method="post">
+            <div class="inputs">
+                <input type="text" rows="3" placeholder="Message" name="message" />
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
