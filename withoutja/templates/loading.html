@@ -11,10 +11,9 @@
         <p>Please wait while we prepare your chat room...</p>
     </div>
     <script>
-        // Redirect to chat room after a delay
         setTimeout(function() {
             window.location.href = "{{ url_for('chat') }}";
-        }, 2000);  // Adjust the time as needed
+        }, 2000);  
     </script>
 </body>
 </html>
