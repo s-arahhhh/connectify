@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Ratings and Feedback</title>
+</head>
+
+<body class="ratings-body">
+    <div class="wrapper">
+        <h3>Give us an honest review</h3>
+        <form action="{{ url_for('ratings') }}" method="POST">
+            {{ form.hidden_tag() }} 
+            
+            <div class="rating">
+                {{ form.rating.label }}<br>
+                {{ form.rating(size=5) }}<br><br>
+                <input type="hidden" id="rating" name="rating" value="5">
+                <i class='bx bx-star star' style="---i: 0;"></i>
+                <i class='bx bx-star star' style="---i: 1;"></i>
+                <i class='bx bx-star star' style="---i: 2;"></i>
+                <i class='bx bx-star star' style="---i: 3;"></i>
+                <i class='bx bx-star star' style="---i: 4"></i>
+            </div>
+            
+            {{ form.opinion(rows=4, cols=50) }}<br><br>
+            <div class="btn-ratings">
+
+                {{ form.submit() }}
+            </div>
+        </form>
+
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+

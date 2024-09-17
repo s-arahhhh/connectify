@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="container-d">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a>
+                  <div class="title">Connectify</div>
+                </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('studyspace') }}">Study Space</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('library') }}">Library</a>
+                        <div class="title"></div>
+
+                </li>
+                <li>
+                    <a href="{{ url_for('ratings') }}">Feedback and ratings</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('logout') }}">
+                        <div class="title">Log Out</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-d">
+            <div class="top-bar">
+                <div class="search">
+                    <input type="text" name="search" placeholder="Search Here">
+                    <label for="search"></label>
+                </div>
+                <div class="user">
+                <img class="user" src="{{ url_for('static', filename='image/user.png') }}" alt="user">
+                </div>
+             </div>
+    <div class="card-d">
+        <div class="video-background2">
+            <video autoplay loop muted plays-inline>
+                <source src="{{ url_for('static', filename='video/video5.mp4') }}" type="video/mp4">
+            </video>  
+        </div>
+        <div class="content">
+    <h1>Hello, you are logged in!<br> Welcome to Connectify</h1></div>
+</div>
+</div>
+</body>
+
+</html>
