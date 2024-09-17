@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ece6f5; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+    max-height: 550px;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column; 
+}
+.card.expanded {
+    width: 90%; 
+    height: 90%;
+    border-radius: 20px; 
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    z-index: 10;
+    max-height: none;
+}
+
+.media-player {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.image-grid {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.grid-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.grid-image:hover {
+    transform: scale(1.1);
+}
+
+.expanded-content {
+    padding: 20px;
+    text-align: center;
+    display: none; 
+    max-height: none; 
+    overflow: visible; 
+}
+
+
+.expanded-content.expanded {
+    display: block; 
+}
+
+.profile-details {
+    margin: 10px 0;
+    color: #666;
+    font-size: 1.1rem;
+    white-space: normal; 
+    overflow: visible; 
+    text-overflow: clip; 
+}
+
+.chat-button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #ff6394;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto 0;
+}
+
+.chat-button:hover {
+    background-color: #ff4a7b;
+}
