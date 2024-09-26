@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Chat App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="content-chat">
+        {% if session.get("name") %}
+            <div class="message-box">
+                <h2>Chat Room: {{ room if room else subject_name }}</h2>
+                <div class="messages" id="messages"></div>
+                <div class="inputs">
+                    <input type="text" rows="3" placeholder="Message" name="message" id="message" />
+                    <button type="button" name="send" id="send-btn">Send</button>
+                </div>
+            </div>
+            <script type="text/javascript">
+            const socketio = io();
+            const messages = document.getElementById("messages");
+
+            const createMessage = (name, msg) => {
+                const content = `
+                <div class="text">
+                    <span><strong>${name}</strong>: ${msg}</span>
+                    <span class="muted">${new Date().toLocaleString()}</span>
+                </div>
+                `;
+                messages.innerHTML += content;
+                messages.scrollTop = messages.scrollHeight; // Auto-scroll
+            };
+
+            socketio.on("message", (data) => {
+                createMessage(data.name, data.message);
+            });
+
+            const sendMessage = () => {
+                const messageInput = document.getElementById("message");
+                const message = messageInput.value.trim();
+                if (message === "") return;
+
+                socketio.emit("message", { data: message });
+                createMessage('{{ session.get("name") }}', message);
+                messageInput.value = ""; // Clear input
+            };
+
+            document.getElementById("send-btn").addEventListener("click", sendMessage);
+            document.getElementById("message").addEventListener("keypress", (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            </script>
+        {% else %}
+            <form method="post" class="buttons-chat">
+                <h3>Enter The Chat Room</h3>
+                <div>
+                    <label>Name:</label>
+                    <input type="text" placeholder="Pick a name!" name="name" required />
+                </div>
+                <div class="join-chat">
+                    <button type="submit" name="join">Join a Room</button>
+                </div>
+                {% if error %}
+                <ul>
+                    <li>{{ error }}</li>
+                </ul>
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
