@@ -791,6 +791,7 @@ margin-bottom: 8px;
     cursor: pointer;
     font-size: .875rem;
     font-weight: 500;
+<<<<<<< HEAD
 
     * .upload-page{
         width: 100%;
@@ -1178,3 +1179,8 @@ margin-bottom: 8px;
 .chat-button:hover {
     background-color: #ff4a7b;
 }
+=======
+}
+
+
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040

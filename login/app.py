@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from fileinput import filename
 from flask import Flask, redirect, url_for, request, render_template, send_file, session
 from flask_sqlalchemy import SQLAlchemy
@@ -22,10 +23,27 @@ bcrypt = Bcrypt(app)
 socketio = SocketIO(app)
 
 # Login manager setup
+=======
+from flask import Flask, render_template, url_for, redirect, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextAreaField
+from wtforms.validators import InputRequired, Length, ValidationError, DataRequired, NumberRange
+from flask_bcrypt import Bcrypt
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SECRET_KEY'] = 'thisisasecretkey'
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+<<<<<<< HEAD
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
@@ -34,11 +52,18 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Models
+=======
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))  
+
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
 
+<<<<<<< HEAD
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False)
@@ -51,6 +76,8 @@ class UploadForm(FlaskForm):
     download = SubmitField("Download")
 
 # Forms
+=======
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
@@ -71,6 +98,7 @@ class RatingsForm(FlaskForm):
     opinion = TextAreaField('Opinion', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+<<<<<<< HEAD
 def init_db():
     conn = sqlite3.connect('user_profiles.db')
     cursor = conn.cursor()
@@ -140,10 +168,13 @@ def get_uploaded_files():
 # Emoji options for profile
 emoji_options = ['😀', '😂', '😍', '😎', '🥳', '🤩', '🥺', '😡', '👽']
 # Routes
+=======
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 @app.route('/')
 def index():
     return render_template('index.html')
 
+<<<<<<< HEAD
 @app.route('/profile')
 def profile():
     conn = sqlite3.connect('user_profiles.db')
@@ -278,6 +309,11 @@ def download():
         cursor.close()
         conn.close()
     return render_template('library.html', form=form)  # Pass form on failure
+=======
+@app.route('/about')
+def about():
+    return render_template('page2.html') 
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -306,10 +342,18 @@ def register():
 def dashboard():
     return render_template('dashboard.html')
 
+<<<<<<< HEAD
+=======
+@app.route('/page1')
+def page1():
+    return render_template('page1.html')  
+
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 @app.route('/page2')
 def page2():
     return render_template('page2.html')  
 
+<<<<<<< HEAD
 @app.route('/page1')
 def page1():
     return render_template('page1.html')
@@ -317,11 +361,30 @@ def page1():
 @app.route('/page3')
 def page3():
     return render_template('page3.html')
+=======
+@app.route('/page3')
+def page3():
+    return render_template('page3.html')  
+
+@app.route('/library')
+def library():
+    return render_template('library.html')  
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html') 
+
+@app.route('/studyspace')
+def studyspace():
+    return render_template('studyspace.html')  
+
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
 
 @app.route('/ratings', methods=['GET', 'POST'])
 def ratings():
     form = RatingsForm()
     if form.validate_on_submit():
+<<<<<<< HEAD
         rating = form.rating.data
         opinion = form.opinion.data
         print(f'Rating: {rating}, Opinion: {opinion}')
@@ -404,3 +467,33 @@ def create_tables():
 if __name__ == "__main__":
     create_tables()
     socketio.run(app, debug=True)
+=======
+        # Get form data
+        rating = form.rating.data
+        opinion = form.opinion.data
+
+        
+        print(f'Rating: {rating}, Opinion: {opinion}')
+
+       
+        return redirect(url_for('dashboard'))
+
+    return render_template('ratings.html', form=form)
+
+def process_feedback(rating, opinion):
+    
+    feedback = Feedback(rating=rating, opinion=opinion)  
+    db.session.add(feedback)
+    db.session.commit()
+
+    return "Feedback saved successfully"
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+>>>>>>> 527bffbb16cc24e81c4b5f8b14da6c8dfb27c040
