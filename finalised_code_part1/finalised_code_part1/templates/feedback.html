@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Ratings and Feedback</title>
+</head>
+
+<body>
+    <div class="navbar-d">
+        <img class="logo" src="{{ url_for('static', filename='image/logo2.jpeg') }}" alt="Logo">
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
+            <li><a href="{{ url_for('upload') }}">SUBJECTS</a></li>
+            <li><a href="{{ url_for('studyspace') }}">STUDY SPACE</a></li>
+            <li><a href="{{ url_for('feedback') }}">FEEDBACK</a></li>
+        </ul>
+    </div>
+   <div class="ratings-body">
+    <div class="wrapper">
+    <h2>Feedback Form</h2>
+    <br>
+    <br>
+    <form method="POST">
+        {{ feedback_form.hidden_tag() }}
+        
+        <label for="rating">Rating(1 to 5):</label>
+        {{ feedback_form.rating() }}<br>
+        
+        <label for="comments">Comments:</label><br>
+        {{ feedback_form.comments(rows=4, cols=50) }}<br>
+
+        {{ feedback_form.submit() }}
+    </form>
+    
+</div>
+</div>
+</body>
+</html>
+
+
+
