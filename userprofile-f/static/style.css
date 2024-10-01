@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #0d0d33; /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-container {
+    background-color: #1a1a4d; /* Darker blue for the container */
+    border: 2px solid #00ccff; /* Neon blue border */
+    width: 600px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.5); /* Neon glow */
+    border-radius: 10px; /* Rounded corners */
+}
+
+
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px; /* Space between avatar and text */
+    color: #00ccff;
+}
+
+.avatar {
+    background-color: #e3bf8a;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #00ccff; /* Neon border for avatar */
+    margin-bottom: 10px;
+    object-fit: cover; /* Ensures the image fits well */
+}
+
+.about-section {
+    flex-grow: 1; /* Allows this section to take up remaining space */
+    text-align: center;
+}
+
+.about-section h3 {
+    font-size: 20px;
+    color: #00ccff; /* Neon text color */
+    margin-bottom: 10px;
+}
+
+.about-text {
+    width: 100%;
+    height: 100px; /* Increased height for the About Me box */
+    margin-bottom: 10px;
+    padding: 10px; /* Added padding for better text spacing */
+    border: 1px solid #00ccff; /* Neon border */
+    background-color: rgba(0, 204, 255, 0.1); /* Light neon background */
+    resize: none;
+    color: #fff; /* White text color */
+}
+
+textarea, input, select {
+    width: 100%;
+    border: 1px solid #00ccff; /* Neon border */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0, 204, 255, 0.1); /* Light neon background */
+    color: #fff; /* White text color */
+}
+
+.profile-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #00ccff; /* Neon blue button */
+    border: none;
+    padding: 10px;
+    color: #fff; /* White text */
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #0099cc; /* Darker neon on hover */
+}
+
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #00ccff;
+}
+
+.watch-list, .likes-section, .dislikes-section {
+    background-color: rgba(0, 204, 255, 0.1); /* Light neon background */
+    padding: 10px;
+    border: 1px solid #00ccff; /* Neon border */
+    border-radius: 10px;
+}
+
+.watch-list h3, .likes-section h3, .dislikes-section h3 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #00ccff; /* Neon text color */
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: none;
+    border-color: #00ccff; /* Neon border on focus */
+}
+
+/* Emoji size adjustment */
+.emoji-selector {
+    font-size: 30px; /* Increased emoji size */
+    cursor: pointer; /* Pointer cursor for better UX */
+    color: #fff; /* White text color for emojis */
+}
+
+.profile-body{
+    color: #00ccff;
+}
