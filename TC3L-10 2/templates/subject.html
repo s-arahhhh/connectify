@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Mode Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-subject {
+            width: 100%;
+            max-width: 900px; 
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            transition: transform 0.3s ease;
+        }
+
+        .container-subject:hover {
+            transform: scale(1.02); 
+        }
+
+        .media-player {
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        .song-info {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .song-subtitle {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .bar {
+            flex: 1;
+            height: 4px;
+            background-color: #ddd;
+            margin: 0 10px;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .progress {
+            width: 25%; 
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .grid-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            object-fit: cover;
+        }
+
+        .expanded-content {
+            text-align: center;
+            margin-top: 20px;
+            display: none; 
+        }
+
+        .expanded-content.active {
+            display: block;
+        }
+
+        .profile-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .join-chat-link {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-subject" id="mainCard">
+        <div class="media-player">
+            <img src="{{ url_for('static', filename='image/profile.jpg') }}" alt="Profile Picture" class="profile-pic">
+            <div class="song-info">
+                <p class="song-title">Currently Playing:</p>
+                <p class="song-subtitle">{{ subject_name }}</p>
+                <div class="progress-bar">
+                    <span>0:22</span>
+                    <div class="bar">
+                        <div class="progress"></div>
+                    </div>
+                    <span>2:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-grid">
+            <img src="{{ url_for('static', filename='image/studywithcoursemates.jpg') }}" class="grid-image" data-function="study_with_random_coursemates" alt="Study with Course Mates">
+            <img src="{{ url_for('static', filename='image/studybuddy.jpg') }}" class="grid-image" data-function="study_buddy" alt="Study Buddy">
+            <img src="{{ url_for('static', filename='image/studyalone.jpg') }}" class="grid-image" data-function="study_alone" alt="Study Alone">
+            <img src="{{ url_for('static', filename='image/library.jpg') }}" class="grid-image" data-function="library_shortcut" alt="Library Shortcut">
+        </div>
+
+        <div class="expanded-content" id="expandedContent">
+            <h2>Info:</h2>
+            <p class="profile-details" id="profileDetails"></p>
+            <a href="#" class="join-chat-link" id="joinChatLink">Join Chat</a>
+        </div>   
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('#mainCard');
+            const gridImages = document.querySelectorAll('.grid-image');
+            const expandedContent = document.querySelector('#expandedContent');
+            const profileDetails = document.querySelector('#profileDetails');
+            const joinChatLink = document.querySelector('#joinChatLink');
+            let isExpanded = false;
+    
+            gridImages.forEach((image) => {
+                image.addEventListener('click', () => {
+                    const functionType = image.getAttribute('data-function');
+                    expandedContent.classList.toggle('active'); 
+    
+                    switch (functionType) {
+                        case 'study_with_random_coursemates':
+                            profileDetails.textContent = 'Join a chat with random course mates!';
+                            joinChatLink.href = "{{ url_for('chat', subject_name=subject_name|lower) }}";
+                            break;
+                        case 'study_buddy':
+                            profileDetails.textContent = 'Find a study buddy to help you!';
+                            joinChatLink.href = "{{ url_for('studybuddy', subject_name=subject_name|lower) }}";                            break;
+                        case 'study_alone':
+                            profileDetails.textContent = 'Study alone with helpful resources.';
+                            joinChatLink.href = "{{ url_for('study_alone', subject_name=subject_name|lower) }}";
+                            break;
+                            case 'library_shortcut':
+                            profileDetails.textContent = 'Shortcut to uploaded files.';
+                            joinChatLink.href = "{{ url_for('upload') }}";  
+                            break;
+                    }
+                });
+            });
+        });
+    </script>    
+</body>
+</html>

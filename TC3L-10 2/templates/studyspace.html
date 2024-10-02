@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Study Space</title>
+</head>
+
+<body class="ss-body">
+    <div class="container-d">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a>
+                  <div class="title">Connectify</div>
+                </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <div class="title"></div>
+
+                </li>
+                <li>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('upload') }}">Library</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('feedback') }}">Feedback and ratings</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('logout') }}">
+                        <div class="title">Log Out</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <br<br>
+    <div class="container">
+        <header>
+            <h1>WELCOME TO THE SUBJECT CHAT</h1>
+        </header>
+    </div>
+
+        <div class="content-ss">
+            <section class="subject-section">
+                <h2>Select a Subject to Start Chat</h2>
+                <ul class="card-content">
+                    {% for subject in rooms.keys() %}
+                        <li>
+                            <a href="{{ url_for('subject', subject_name=subject) }}">{{ subject }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
